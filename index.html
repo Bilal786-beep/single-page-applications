@@ -1,125 +1,150 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SPA Authentication with Products</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
-
-    #app {
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;  
-      width: 350px;
-    }
-
-    h2 {
-      text-align: center;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      box-sizing: border-box;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    .toggle {
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    .toggle button {
-      background-color: #008CBA;
-    }
-
-    .product-card {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-    }
-
-    .product-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 6px;
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .top-bar button {
-      width: auto;
-      padding: 8px 16px;
-    }
-
-  </style>
-</head>
-
-<body>
-  <div id="app"></div>
-
-  <script>
-    // Initial Users
-    let users = [
-      { firstname: "Alice", lastname: "Johnson", email: "alice.johnson@example.com", password: "password123" },
-      { firstname: "Bob", lastname: "Smith", email: "bob.smith@example.com", password: "securePass456" },
-      { firstname: "Carol", lastname: "Miller", email: "carol.miller@example.com", password: "qwerty789" },
-      { firstname: "David", lastname: "Lee", email: "david.lee@example.com", password: "myPassword321" },
-      { firstname: "Eve", lastname: "Davis", email: "eve.davis@example.com", password: "passWord!2024" }
-    ];
-
-    // Initial Products (Bilal's part)
-    let products = [
-      {
-        name: "Laptop",
-        description: "14-inch, i5 processor, 8GB RAM",
-        image: "https://via.placeholder.com/300x150"
-      },
-      {
-        name: "Smartphone",
-        description: "128GB, 5G enabled, Dual Camera",
-        image: "https://via.placeholder.com/300x150"
+  <head>
+    <title>SPA Authentication with Products</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
       }
-    ];
 
-    let currentView = "login";
-    let loggedInUser = null;
-    const app = document.getElementById("app");
+      #app {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        width: 350px;
+      }
 
-    function switchView(view) {
-      currentView = view;
-      showView();
-    }
+      h2 {
+        text-align: center;
+      }
 
-    function showView() {
-      if (currentView === "login") {
-        app.innerHTML = `
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .toggle {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      .toggle button {
+        background-color: #008cba;
+      }
+
+      .product-card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+      }
+
+      .product-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .top-bar button {
+        width: auto;
+        padding: 8px 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <script>
+      // Initial Users
+      let users = [
+        {
+          firstname: "Alice",
+          lastname: "Johnson",
+          email: "alice.johnson@example.com",
+          password: "password123",
+        },
+        {
+          firstname: "Bob",
+          lastname: "Smith",
+          email: "bob.smith@example.com",
+          password: "securePass456",
+        },
+        {
+          firstname: "Carol",
+          lastname: "Miller",
+          email: "carol.miller@example.com",
+          password: "qwerty789",
+        },
+        {
+          firstname: "David",
+          lastname: "Lee",
+          email: "david.lee@example.com",
+          password: "myPassword321",
+        },
+        {
+          firstname: "Eve",
+          lastname: "Davis",
+          email: "eve.davis@example.com",
+          password: "passWord!2024",
+        },
+      ];
+
+      // Initial Products (Bilal's part)
+      let products = [
+        {
+          name: "Laptop",
+          description: "14-inch, i5 processor, 8GB RAM",
+          image: "https://via.placeholder.com/300x150",
+        },
+        {
+          name: "Smartphone",
+          description: "128GB, 5G enabled, Dual Camera",
+          image: "https://via.placeholder.com/300x150",
+        },
+      ];
+
+      let currentView = "login";
+      let loggedInUser = null;
+      const app = document.getElementById("app");
+
+      function switchView(view) {
+        currentView = view;
+        showView();
+      }
+
+      function showView() {
+        if (currentView === "login") {
+          app.innerHTML = `
           <h2>Login</h2>
           <input type="email" id="loginEmail" placeholder="Email" />
           <input type="password" id="loginPassword" placeholder="Password" />
@@ -129,8 +154,8 @@
             <button onclick="switchView('register')">Go to Register</button>
           </div>
         `;
-      } else if (currentView === "register") {
-        app.innerHTML = `
+        } else if (currentView === "register") {
+          app.innerHTML = `
           <h2>Register</h2>
           <input type="text" id="firstName" placeholder="First Name" />
           <input type="text" id="lastName" placeholder="Last Name" />
@@ -142,137 +167,143 @@
             <button onclick="switchView('login')">Go to Login</button>
           </div>
         `;
-      } else if (currentView === "welcome") {
-        app.innerHTML = `
+        } else if (currentView === "welcome") {
+          app.innerHTML = `
           <h2>Welcome, ${loggedInUser.firstname}!</h2>
           <p>You are now logged in.</p>
           <button onclick="switchView('products')">Go to Products</button>
           <button onclick="logout()">Logout</button>
         `;
-      } else if (currentView === "products") {
-        renderProductList();
+        } else if (currentView === "products") {
+          renderProductList();
+        }
       }
-    }
 
-    function renderProductList() {
-      let html = `
+      function renderProductList() {
+        let html = `
         <div class="top-bar">
           <h2>Products</h2>
           <button onclick="switchView('add-product')">+ Add Product</button>
         </div>
       `;
 
-      products.forEach(prod => {
-        html += `
+        products.forEach((prod) => {
+          html += `
           <div class="product-card">
             <h3>${prod.name}</h3>
             <img src="${prod.image}" alt="${prod.name}">
             <p>${prod.description}</p>
           </div>
         `;
-      });
+        });
 
-      html += `<button onclick="logout()">Logout</button>`;
-      app.innerHTML = html;
-    }
-
-    function register() {
-      const firstName = document.getElementById("firstName").value.trim();
-      const lastName = document.getElementById("lastName").value.trim();
-      const email = document.getElementById("regEmail").value.trim();
-      const password = document.getElementById("regPassword").value.trim();
-
-      if (!firstName || !lastName || !email || !password) {
-        alert("Please fill in all fields.");
-        return;
+        html += `<button onclick="logout()">Logout</button>`;
+        app.innerHTML = html;
       }
 
-      const exists = users.find(user => user.email === email);
-      if (exists) {
-        alert("User already exists.");
-        return;
+      function register() {
+        const firstName = document.getElementById("firstName").value.trim();
+        const lastName = document.getElementById("lastName").value.trim();
+        const email = document.getElementById("regEmail").value.trim();
+        const password = document.getElementById("regPassword").value.trim();
+
+        if (!firstName || !lastName || !email || !password) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        const exists = users.find((user) => user.email === email);
+        if (exists) {
+          alert("User already exists.");
+          return;
+        }
+
+        users.push({
+          firstname: firstName,
+          lastname: lastName,
+          email,
+          password,
+        });
+        alert("Registered successfully! Now login.");
+        switchView("login");
       }
 
-      users.push({ firstname: firstName, lastname: lastName, email, password });
-      alert("Registered successfully! Now login.");
-      switchView("login");
-    }
+      function login() {
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const user = users.find(
+          (u) => u.email === email && u.password === password
+        );
+        if (user) {
+          loggedInUser = user;
+          currentView = "welcome";
+          showView();
+        } else {
+          alert("Invalid email or password.");
+        }
+      }
 
-    function login() {
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
-      const user = users.find(u => u.email === email && u.password === password);
-      if (user) {
-        loggedInUser = user;
-        currentView = "welcome";
+      function logout() {
+        loggedInUser = null;
+        currentView = "login";
         showView();
-      } else {
-        alert("Invalid email or password.");
       }
-    }
 
-    function logout() {
-      loggedInUser = null;
-      currentView = "login";
       showView();
-    }
 
-    showView();
-  </script>
-</body>
-</html>
+      function switchView(view) {
+        currentView = view;
+        showView();
+      }
 
+      function register() {
+        const firstName = document.getElementById("firstName").value.trim();
+        const lastName = document.getElementById("lastName").value.trim();
+        const email = document.getElementById("regEmail").value.trim();
+        const password = document.getElementById("regPassword").value.trim();
 
-   
-    function switchView(view) {
-      currentView = view;
+        if (!firstName || !lastName || !email || !password) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        const exists = users.find((user) => user.email === email);
+        if (exists) {
+          alert("User already exists.");
+          return;
+        }
+
+        users.push({
+          firstname: firstName,
+          lastname: lastName,
+          email,
+          password,
+        });
+        alert("Registered successfully! Now login.");
+        switchView("login");
+      }
+
+      function login() {
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const user = users.find(
+          (u) => u.email === email && u.password === password
+        );
+        if (user) {
+          loggedInUser = user;
+          currentView = "welcome";
+        } else {
+          alert("Invalid email or password.");
+        }
+      }
+
+      function logout() {
+        loggedInUser = null;
+        currentView = "login";
+        showView();
+      }
+
       showView();
-    }
-
-    function register() {
-      const firstName = document.getElementById("firstName").value.trim();
-      const lastName = document.getElementById("lastName").value.trim();
-      const email = document.getElementById("regEmail").value.trim();
-      const password = document.getElementById("regPassword").value.trim();
-
-      if (!firstName || !lastName || !email || !password) {
-        alert("Please fill in all fields.");
-        return;
-      }
-
-      const exists = users.find(user => user.email === email);
-      if (exists) {
-        alert("User already exists.");
-        return;
-      }
-
-      users.push({ firstname: firstName, lastname: lastName, email, password });
-      alert("Registered successfully! Now login.");
-      switchView("login");
-    }
-
- 
-    function login() {
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
-      const user = users.find(u => u.email === email && u.password === password);
-      if (user) {
-        loggedInUser = user;
-        currentView = "welcome";
-      } else {
-        alert("Invalid email or password.");
-      }
-    }
-  
-
-    function logout() {
-      loggedInUser = null;
-      currentView = "login";
-      showView();
-    }
-
-   
-    showView();
-  </script>
-</body>
+    </script>
+  </body>
 </html>
