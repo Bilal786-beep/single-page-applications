@@ -79,27 +79,18 @@
           return;
         }
 
-        // This can be updated to use localStorage, API, or communicate with main app state
         const newProduct = { name, description, image };
 
-        // You can use this data however you like, for example:
         console.log("New Product:", newProduct);
 
         alert("Product added successfully!");
 
-        // Optional: store in localStorage
-        // let storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
-        // storedProducts.push(newProduct);
-        // localStorage.setItem("products", JSON.stringify(storedProducts));
-
-        // Clear form
         document.getElementById("productName").value = "";
         document.getElementById("productDescription").value = "";
         document.getElementById("productImage").value = "";
       }
 
       function goBack() {
-        // Simple redirect if using multiple pages
         window.location.href = "index.html";
       }
     </script>
