@@ -61,7 +61,7 @@
         id="productDescription"
         placeholder="Product Description"
       ></textarea>
-      <input type="file" id="productImage" placeholder="product image" />
+      <input type="file" id="productImage" placeholder="Image URL" />
       <button onclick="addProduct()">Add Product</button>
       <button class="back-button" onclick="goBack()">Back to Products</button>
     </div>
@@ -82,7 +82,6 @@
         const newProduct = { name, description, image };
 
         console.log("New Product:", newProduct);
-
         alert("Product added successfully!");
 
         document.getElementById("productName").value = "";
